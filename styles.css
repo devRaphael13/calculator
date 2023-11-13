@@ -5,10 +5,15 @@
 :root {
     margin: 0;
     padding: 0;
-    --screen-color: #B2B9B7;
-    --modifier-color: #1E90FF;
-    --operator-color: #FF8F1F;
-    --number-color: #217C7E;
+    --screen: #B2B9B7;
+    --modifier: #1E90FF;
+    --modifier-clicked: #00478F;
+
+    --operator: #FF8F1F;
+    --operator-clicked: #A35200;
+
+    --number: #217C7E;
+    --number-clicked: #134647;
 }
 
 body {
@@ -31,7 +36,7 @@ button {
 }
 
 .calculator__screen {
-    background-color: var(--screen-color);
+    background-color: var(--screen);
     padding: 0.5em;
     height: 8em;
     border: 0.5em solid black;
@@ -68,13 +73,13 @@ button {
 }
 
 .keypad__key--operator {
-    background: var(--operator-color);
+    background: var(--operator);
 }
 
 .keypad__key--nums {
-    background: var(--number-color);
+    background: var(--number);
 }
 
 .keypad__key--mod {
-    background: var(--modifier-color);
+    background: var(--modifier);
 }

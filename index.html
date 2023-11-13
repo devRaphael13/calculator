@@ -9,31 +9,32 @@
 <body>
     <main class="calculator">
         <div class="calculator__screen">
-            <div class="screen__display screen__display--top">1000 x 5 =</div>
-            <div class="screen__display screen__display--bottom">5000</div>
+            <div id="question" class="screen__display screen__display--top" contenteditable="true"></div>
+            <div id="answer" class="screen__display screen__display--bottom" contenteditable="true"></div>
         </div>
 
         <div class="calculator__keypad">
-            <button class="keypad__key keypad__key--mod">AC</button>
-            <button class="keypad__key keypad__key--mod">+/-</button>
-            <button class="keypad__key keypad__key--mod">%</button>
-            <button class="keypad__key keypad__key--operator">/</button>
-            <button class="keypad__key keypad__key--nums">7</button>
-            <button class="keypad__key keypad__key--nums">8</button>
-            <button class="keypad__key keypad__key--nums">9</button>
-            <button class="keypad__key keypad__key--operator">x</button>
-            <button class="keypad__key keypad__key--nums">4</button>
-            <button class="keypad__key keypad__key--nums">5</button>
-            <button class="keypad__key keypad__key--nums">6</button>
-            <button class="keypad__key keypad__key--operator">-</button>
-            <button class="keypad__key keypad__key--nums">1</button>
-            <button class="keypad__key keypad__key--nums">2</button>
-            <button class="keypad__key keypad__key--nums">3</button>
-            <button class="keypad__key keypad__key--operator">+</button>
-            <button class="keypad__key keypad__key--nums zero-key">0</button>
-            <button class="keypad__key keypad__key--nums">.</button>
-            <button class="keypad__key keypad__key--operator">=</button>
+            <button data-number="false" class="keypad__key keypad__key--mod">AC</button>
+            <button data-number="false" class="keypad__key keypad__key--mod">Del</button>
+            <button data-number="false" class="keypad__key keypad__key--mod">+/-</button>
+            <button data-number="false" class="keypad__key keypad__key--operator">/</button>
+            <button data-number="true" class="keypad__key keypad__key--nums">7</button>
+            <button data-number="true" class="keypad__key keypad__key--nums">8</button>
+            <button data-number="true" class="keypad__key keypad__key--nums">9</button>
+            <button data-number="false" class="keypad__key keypad__key--operator">x</button>
+            <button data-number="true" class="keypad__key keypad__key--nums">4</button>
+            <button data-number="true" class="keypad__key keypad__key--nums">5</button>
+            <button data-number="true" class="keypad__key keypad__key--nums">6</button>
+            <button data-number="false" class="keypad__key keypad__key--operator">-</button>
+            <button data-number="true" class="keypad__key keypad__key--nums">1</button>
+            <button data-number="true" class="keypad__key keypad__key--nums">2</button>
+            <button data-number="true" class="keypad__key keypad__key--nums">3</button>
+            <button data-number="false" class="keypad__key keypad__key--operator">+</button>
+            <button data-number="true" class="keypad__key keypad__key--nums zero-key">0</button>
+            <button data-number="false" class="keypad__key keypad__key--nums">.</button>
+            <button data-number="false" class="keypad__key keypad__key--operator">=</button>
         </div>
     </main>
+    <script src="scripts.js"></script>
 </body>
 </html>
