@@ -59,6 +59,10 @@ function validateSign(ram) {
             updateQuestion(...array);
         }
     });
+    
+    let q = question.textContent.split(" ")
+    let a = q.map((element) => removePoint(element)).join("")
+    if (q.join("") !== a) updateQuestion(a)
     return ram;
 }
 function updateQuestion(num, lastSign = null) {
@@ -81,12 +85,22 @@ function clean(display) {
             .split(" ")
             .filter((element) => element !== "")
             .map((element) =>
-                signs.includes(element) ? element : Number.parseFloat(element)
+                signs.includes(element) ? element : Number.parseFloat(removePoint(element))
             );
     } else {
         display = [];
     }
     return display;
+}
+
+function removePoint(string) {
+    // Remove unnecessary decimal points eg 123.333.2
+    let arr = string.split(".");
+    if (arr.length > 1) {
+        let int = arr.splice(0, 1);
+        return `${int}.${arr.join("")}`
+    }
+    return string
 }
 
 function calculate(a, sign, b = null) {
