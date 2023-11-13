@@ -108,16 +108,16 @@ function operate() {
 function readyKeypad() {
     for (let key of keypad) {
         key.addEventListener("click", (e) => {
-
-            // Handle some modifying characters
-            if (e.target.textContent === "AC") clear();
-            else if (e.target.textContent === "Del") del();
-            else {
-
-                // format text on screen
-                let space = e.target.dataset.number === "false" ? " " : "";
-                question.textContent += space + e.target.textContent + space;
-            }
+                if (e.target.textContent === "AC")
+                    // Handle some modifying characters
+                    clear();
+                else if (e.target.textContent === "Del") del();
+                else {
+                    // format text on screen
+                    let space = e.target.dataset.number === "true" || e.target.textContent === "." ? "" : " ";
+                    question.textContent +=
+                        space + e.target.textContent + space;
+                }
         });
     }
 }
