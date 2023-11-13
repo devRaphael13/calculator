@@ -2,7 +2,7 @@ const keypad = document.getElementsByClassName("keypad__key");
 const question = document.getElementById("question");
 const answer = document.getElementById("answer");
 
-const signs = ["=", "+", "-", "x", "/", "%"];
+const signs = ["=", "+", "-", "x", "/", "%", "."];
 const config = { characterData: true, subtree: true, childList: true };
 
 const observer = new MutationObserver((mutations) => {
@@ -35,8 +35,7 @@ function validateSign(ram) {
         updateQuestion("");
     else if (preSigns.includes(ram[0]) && ram[1]) {
         let [sign, num] = ram.splice(0, 2);
-        ram.unshift(Number.parseFloat(`${sign}${num}`))
-        console.log(ram)
+        ram.unshift(Number.parseFloat(`${sign}${num}`));
     }
     ram.filter((element, i, array) => {
         if (signs.includes(array[i]) && signs.includes(array[i - 1])) {
@@ -47,20 +46,28 @@ function validateSign(ram) {
     return ram;
 }
 function updateQuestion(num, lastSign = null) {
-    question.textContent = lastSign ? `${num} ${lastSign} ` : num;
+    question.textContent = lastSign
+        ? `${num} ${lastSign} `
+        : num === "E"
+        ? ""
+        : num;
 }
 function showAnswer(num) {
     answer.textContent = num;
 }
 function clean(display) {
-    return display
-        ? display
-              .split(" ")
-              .filter((element) => element !== "")
-              .map((element) =>
-                  signs.includes(element) ? element : Number.parseFloat(element)
-              )
-        : [];
+    if (display) {
+        display = display
+            .slice(0, 12)
+            .split(" ")
+            .filter((element) => element !== "")
+            .map((element) =>
+                signs.includes(element) ? element : Number.parseFloat(element)
+            );
+    } else {
+        display = [];
+    }
+    return display;
 }
 
 document.addEventListener("DOMContentLoaded", () => operate());
@@ -84,12 +91,15 @@ function readyKeypad() {
 }
 
 function calculate(a, sign, b = null) {
-    if (sign === "+" && b) return a + b;
-    else if (sign === "-" && b) return a - b;
-    else if (sign === "x" && b) return a * b;
-    else if (sign === "/" && b) return b === 0 ? 0 : a / b;
-    else if (sign === "%") return a / 100;
-    else return 0;
+    const max = 999999999999;
+    let ans;
+    if (sign === "+" && b) ans = a + b;
+    else if (sign === "-" && b) ans = a - b;
+    else if (sign === "x" && b) ans = a * b;
+    else if (sign === "/" && b) ans = b === 0 ? 0 : a / b;
+    else if (sign === "%") ans = a / 100;
+    else return (ans = 0);
+    return ans < max ? Number.parseFloat(ans.toFixed(10)) : "E";
 }
 
 function clear() {
