@@ -11,6 +11,11 @@ const observer = new MutationObserver((mutations) => {
 
     ram.push(...clean(display));
     ram = validateSign(ram);
+    if (ram.length > 1 && ram.slice(-1) == "%") {
+        let ans = calculate(...ram);
+        updateQuestion(ans);
+        showAnswer(ans);
+    }
     if (ram.length > 3) {
         let ans = calculate(...ram);
         let lastSign = ram[3];
@@ -25,9 +30,14 @@ observer.observe(question, config);
 // observer.disconnect()
 
 function validateSign(ram) {
-    if (signs.includes(ram[0]) && !["+", "-"].includes(ram[0]))
+    const preSigns = ["+", "-"];
+    if (signs.includes(ram[0]) && !preSigns.includes(ram[0]))
         updateQuestion("");
-
+    else if (preSigns.includes(ram[0]) && ram[1]) {
+        let [sign, num] = ram.splice(0, 2);
+        ram.unshift(Number.parseFloat(`${sign}${num}`))
+        console.log(ram)
+    }
     ram.filter((element, i, array) => {
         if (signs.includes(array[i]) && signs.includes(array[i - 1])) {
             array.splice(i - 1, 1);
