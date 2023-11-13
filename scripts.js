@@ -58,7 +58,6 @@ function showAnswer(num) {
 function clean(display) {
     if (display) {
         display = display
-            .slice(0, 12)
             .split(" ")
             .filter((element) => element !== "")
             .map((element) =>
